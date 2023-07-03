@@ -1,0 +1,55 @@
+
+
+
+.input {
+	outline: none;
+	border: none;
+	display: block;
+    border-radius: 5px;
+    font-size: 16px;
+    background: white;
+    width: 100%;
+    border: 0;
+    padding: 10px 10px;
+    margin: 15px -10px;
+}
+
+$redFire: rgba(244, 91, 105, 1);
+$greenSeaweed: rgba(2, 128, 144, 1);
+
+.hola {
+    border-color: tomato;
+    
+}
+
+.login {
+
+    overflow: hidden;
+    background-color: rgb(160, 74, 148);
+    padding: 40px 30px 30px 30px;
+    border-radius: 10px;
+   
+    width: 400px;
+    box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
+   
+}
+
+// Fonts
+$fontAsap: 'Asap', sans-serif;
+
+.input-error {
+    border-color: tomato;
+}
+
+button {
+    cursor: pointer;
+    color: #fff;
+    text-transform: uppercase;
+    width: 80px;
+    border: 0;
+    padding: 10px 0;
+    margin-top: 10px;
+    margin-left: -5px;
+    border-radius: 5px;
+    background-color: $redFire;
+}
