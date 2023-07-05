@@ -9,7 +9,6 @@ export default function AppAlert({open, setOpen}) {
 
   return (
     <Box sx={{ width: '100%' }}>
-    {console.log('asasaasS')}
       <Collapse in={open}>
         <Alert
           action={

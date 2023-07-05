@@ -3,13 +3,9 @@ import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import { green } from '@mui/material/colors';
 import Button from '@mui/material/Button';
-import Fab from '@mui/material/Fab';
-import CheckIcon from '@mui/icons-material/Check';
-import SaveIcon from '@mui/icons-material/Save';
 
 export default function AppCircularProgress({text, loading, setSuccess, setLoading, success}) {
  
-  const timer = React.useRef();
 
   const buttonSx = {
     ...(success && {
@@ -20,12 +16,6 @@ export default function AppCircularProgress({text, loading, setSuccess, setLoadi
     }),
   };
 
-  React.useEffect(() => {
-    return () => {
-      clearTimeout(timer.current);
-    };
-  }, []);
-
   const handleButtonClick = () => {
     if (!loading) {
       setSuccess(false);
@@ -34,7 +24,6 @@ export default function AppCircularProgress({text, loading, setSuccess, setLoadi
 
   return (
     <Box sx={{ m: 1, position: 'relative' }}>
-    {console.log(loading)}
     <Button
       type='submit'
       variant="contained"

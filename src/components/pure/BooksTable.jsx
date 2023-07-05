@@ -1,17 +1,11 @@
-import { TableContainer, TableHead, TableRow, Radio, TableCell, Table, TableBody } from '@mui/material';
-import React, { useState } from 'react';
-import { useRef } from 'react';
+import { TableRow, Radio, TableCell } from '@mui/material';
 import PropTypes from 'prop-types'
 
 
 function BooksTable({bookId, radioStatus, handleRadios, bookName}) {
 
-  const radioRef = useRef();
-
   const handleChecked = (e) => {
     handleRadios(e.target.id)
-    
-
   }
 
   return (

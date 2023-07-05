@@ -22,17 +22,9 @@ const CanvassingVehicleContainer = () => {
       if(vehicles.length === 0){
         getVehicles();
       }
-      console.log(vehicles)
       setVehiclesList(vehicles); 
       setLoading(false);
     },[vehicles])
-
-
-    const {books, getBooks} = useContext(BookContext)
-
-    useEffect(()=>{
-      console.log(books)
-    },[])
 
     const handleVehicle = (vehicle) => {
         navigate('/editvehicle', {

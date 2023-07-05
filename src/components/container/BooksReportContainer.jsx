@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import BoosReportTable from '../pure/BooksReportTable';
-import { Box, Typography } from '@mui/material';
+import { Box, Divider, Typography } from '@mui/material';
 import BookContext from '../../context/contexts/BookContext';
 
 function BooksReportContainer() {
@@ -10,29 +10,31 @@ function BooksReportContainer() {
     const state = location.state;
     const [rows, setRows] = useState([])
     const {books, getBooks} = useContext(BookContext); 
+    const [updatedBooks, setUpdatedBooks] = useState(false)
 
     useEffect(()=>{
       if(books.length === 0){
-       getBooks()
-      }
-      let f = books.map((book, index) => {
-        console.log(book)
+        getBooks()
+       } else if(!updatedBooks) {
+          getBooks()
+          setUpdatedBooks(!updatedBooks)
+       }
+ 
+       let row = books.map((book, index) => {
         return {
           name: book.name, 
-          bagsQuantity: state.books_in_bags_quantity.quantity_per_book[index].quantity,
-          vehiclesQuantity: state.books_in_vehicles_quantity.quantity_per_book[index].quantity,
-          roomsQuantity: state.books_in_rooms_quantity.quantity_per_book[index].quantity,
+          bagsQuantity: state.books_in_bags_quantity.quantity_per_book[index] ? state.books_in_bags_quantity.quantity_per_book[index].quantity : 0,
+          vehiclesQuantity: state.books_in_vehicles_quantity.quantity_per_book[index] ? state.books_in_vehicles_quantity.quantity_per_book[index].quantity : 0,
+          roomsQuantity: state.books_in_rooms_quantity.quantity_per_book[index] ? state.books_in_rooms_quantity.quantity_per_book[index].quantity : 0,
           total: book.quantity 
                }
       })
-      setRows(f)
-      console.log(f)
-    },[books])
+      setRows(row)
+    },[books, updatedBooks])
 
 
     return (
     <div>
-    {console.log(rows)}
     <Box
             sx={{
               marginTop: 2,
@@ -51,6 +53,7 @@ function BooksReportContainer() {
               Reporte {state.date}
             </Typography>
           </Box>
+            <Divider/>
               {rows.length !== 0 && <BoosReportTable rows={rows}></BoosReportTable> }
     </div>
   );

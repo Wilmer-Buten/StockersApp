@@ -3,7 +3,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Radio,
   TableCell,
   Table,
   TableBody,
@@ -32,11 +31,9 @@ function BookListContainer() {
   useEffect(() => {
     if (books.length === 0) {
       getBooks();
-      console.log(books);
     } else {
       setBooksList(books);
     }
-    console.log(books);
   }, [books]);
 
   useEffect(() => {
@@ -85,7 +82,6 @@ function BookListContainer() {
           { bookId: rowArr[4].bookId, radioStatus: false },
           { bookId: rowArr[5].bookId, radioStatus: false },
         ];
-        console.log(prevCheckedRadios);
         break;
       case "B":
         prevCheckedRadios[radioRow] = [
@@ -96,7 +92,6 @@ function BookListContainer() {
           { bookId: rowArr[4].bookId, radioStatus: false },
           { bookId: rowArr[5].bookId, radioStatus: false },
         ];
-        console.log(prevCheckedRadios);
         break;
       case "C":
         prevCheckedRadios[radioRow] = [
@@ -107,7 +102,6 @@ function BookListContainer() {
           { bookId: rowArr[4].bookId, radioStatus: false },
           { bookId: rowArr[5].bookId, radioStatus: false },
         ];
-        console.log(prevCheckedRadios);
         break;
       case "D":
         prevCheckedRadios[radioRow] = [
@@ -118,7 +112,6 @@ function BookListContainer() {
           { bookId: rowArr[4].bookId, radioStatus: false },
           { bookId: rowArr[5].bookId, radioStatus: false },
         ];
-        console.log(prevCheckedRadios);
         break;
       case "E":
         prevCheckedRadios[radioRow] = [
@@ -129,7 +122,6 @@ function BookListContainer() {
           { bookId: rowArr[4].bookId, radioStatus: true },
           { bookId: rowArr[5].bookId, radioStatus: false },
         ];
-        console.log(prevCheckedRadios);
         break;
       case "F":
         prevCheckedRadios[radioRow] = [
@@ -140,7 +132,6 @@ function BookListContainer() {
           { bookId: rowArr[4].bookId, radioStatus: false },
           { bookId: rowArr[5].bookId, radioStatus: true },
         ];
-        console.log(prevCheckedRadios);
         break;
 
       default:
@@ -174,19 +165,17 @@ function BookListContainer() {
   };
 
   const submitBooks = async () => {
+
     const token = localStorage.getItem("credentials");
     const studentsBooksReport = fromBooleanToNumber();
     const users = await getUsers();
     const index = users.findIndex((user) => {
       return user.userId === loggedUserId;
     });
-
     let overwrite = false;
-    let nowDate = new Date();
-    let date = "2023-07-01";
+    const nowDate = new Date();
+    const date = nowDate.getFullYear()+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate(); 
     let foundDate = false;
-
-    console.log(users[index]);
     users[index].quantity_per_book.find((obj) => {
       return Date.parse(obj.date) === Date.parse(date);
     }) && (foundDate = true);
@@ -210,7 +199,6 @@ function BookListContainer() {
             quantity: studentsBooksReport,
           }),
         });
-        console.log(res.status);
         res.status === 200 && setShowAlert(true)
         setLoading(false);
 

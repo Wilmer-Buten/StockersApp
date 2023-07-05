@@ -23,18 +23,11 @@ const StockerRoomContainer = () => {
       if(rooms.length === 0){
         getRooms();
       }
-      console.log(rooms)
       setRoomsList(rooms); 
       setLoading(false);
     },[rooms])
 
-
-    const {books, getBooks} = useContext(BookContext)
-
-    useEffect(()=>{
-      console.log(books)
-    },[])
-
+    
     const handleRoom = (room) => {
         navigate('/editroom', {
             state: room

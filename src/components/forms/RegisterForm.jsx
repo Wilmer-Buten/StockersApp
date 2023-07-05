@@ -1,5 +1,4 @@
 import {
-  Button,
   TextField,
   Typography,
   Avatar,
@@ -14,7 +13,7 @@ import { ErrorMessage, Formik } from "formik";
 import * as yup from "yup";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AppCircularProgress from "../pure/loadings/AppCircularProgress";
 
 const RegisterForm = () => {
@@ -79,7 +78,6 @@ const RegisterForm = () => {
             })
         })
         
-        console.log(res.status)
         res.status === 200 && navigate('/login')
         res.status === 403 && setAlreadyExist(true)
       }

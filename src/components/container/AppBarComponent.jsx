@@ -9,21 +9,14 @@ import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import ListSubheader from "@mui/material/ListSubheader";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import PeopleIcon from "@mui/icons-material/People";
 import BarChartIcon from "@mui/icons-material/BarChart";
-import LayersIcon from "@mui/icons-material/Layers";
-import AssignmentIcon from "@mui/icons-material/Assignment";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import TimeToLeaveIcon from "@mui/icons-material/TimeToLeave";
@@ -84,8 +77,7 @@ const defaultTheme = createTheme();
 
 export default function AppBarComponent({ prop }) {
   const [open, setOpen] = useState(false);
-  const { users, loggedUserId, getUsers, setLoggedUserId } =
-    useContext(UserContext);
+  const { users, loggedUserId, getUsers, setLoggedUserId } = useContext(UserContext);
   const [loggedUser, setLoggedUser] = useState("");
   const navigate = useNavigate();
   const toggleDrawer = () => {
@@ -114,9 +106,7 @@ export default function AppBarComponent({ prop }) {
   };
   const handleListItem = (e) => {
     const id = e.target.id;
-    console.log(e.target);
-    console.log(id);
-
+  
     switch (id) {
       case "dashboard":
         navigate("/dashboard");
@@ -139,7 +129,6 @@ export default function AppBarComponent({ prop }) {
   const [bool, setBool] = useState(false);
 
   const handleUserIconClick = () => {
-    console.log(bool);
     setBool(!bool);
   };
 
@@ -148,7 +137,7 @@ export default function AppBarComponent({ prop }) {
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar position="absolute" open={open}>
-        <UserDrawer open={bool} setOpen={setOpen} />
+        <UserDrawer open={bool} setOpen={setOpen} userName={loggedUser} />
           <Toolbar
             sx={{
               pr: "24px", // keep right padding when drawer closed

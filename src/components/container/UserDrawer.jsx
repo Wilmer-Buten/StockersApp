@@ -1,20 +1,23 @@
-import HomeIcon from '@mui/icons-material/Home';
 import { Drawer, ListItem, ListItemIcon, ListItemText } from "@mui/material";
-import { useState } from "react";
+import WavingHandIcon from '@mui/icons-material/WavingHand';  
+  function UserDrawer({open, setOpen, userName}) {
   
-  const data = [
-    {
-        name: "Home",
-        icon: <HomeIcon />,
-      },
+    const data = [
       {
-        name: "Home",
-        icon: <HomeIcon />,
-      },
-  ];
-  
-  function UserDrawer({open, setOpen}) {
-  
+          name: " ",
+        },
+        {
+          name: " ",
+        },
+        {
+          name: " ",
+        },
+        {
+          icon: <WavingHandIcon />,
+          name: `Hola ${userName}!` ,
+        },
+    ];
+
     const getList = () => (
       <div style={{ width: 200 }} onClick={() => setOpen(false)}>
         {data.map((item, index) => (
@@ -27,7 +30,6 @@ import { useState } from "react";
     );
     return (
       <div>
-      {console.log(open)}
         <Drawer open={open} anchor={"right"} onClose={() => setOpen(false)}>
           {getList()}
         </Drawer>

@@ -1,5 +1,4 @@
 import {
-    Button,
     TextField,
     Typography,
     Avatar,
@@ -38,7 +37,6 @@ import AppCircularProgress from "../pure/loadings/AppCircularProgress";
         initialValues={initialValues}
         validationSchema={registerSchema}
         onSubmit={async (values) => {
-          console.log(values);
           try{
             const res = await fetch('http://localhost:4000/user/login', {
               method: "POST",
@@ -57,7 +55,6 @@ import AppCircularProgress from "../pure/loadings/AppCircularProgress";
           }  
           localStorage.setItem('credentials', data.token)
           setLoggedUserId(data.userId);
-          console.log(data)
 
           navigate('/dashboard', {
             replace: true

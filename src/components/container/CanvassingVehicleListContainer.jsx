@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import CanvassingVehicleList from "../pure/CanvassingVehicleList";
 import { useLocation } from "react-router-dom";
 import {
   Box,
@@ -52,9 +51,9 @@ const submitBooks = async (e) => {
   e.preventDefault()
   const token = localStorage.getItem('credentials');
   let overwrite = false;
-  let nowDate = new Date(); 
+  const nowDate = new Date();
+  const date = nowDate.getFullYear()+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate(); 
   let foundDate = false
-  let date = "2023-06-27"
   const index = vehicles.findIndex((vehicle) => {return vehicle._id === state._id})
   vehicles[index].quantity_per_book.find((obj) => {return Date.parse(obj.date) === Date.parse(date)}) && (foundDate = true)
   if (foundDate){

@@ -15,7 +15,6 @@ function WeeklyReportContainer() {
     },[])
 
     const handleRowClick = (e) => {
-        console.log(weeklyReportsList[e.id])
         navigate('/weeklyreport/report', {
             state: weeklyReportsList[e.id]
         })
@@ -41,7 +40,9 @@ function WeeklyReportContainer() {
     }
 
     const handleButton = () => {
-        calculateWeeklyReport();
+      const res = window.confirm("ALERTA: La cantidad de cada libro se actualizará al conteo de esta semana, ¿Quieres continuar?")
+      res && calculateWeeklyReport();
+
     }
 
     const overwriteConfirm = () => {
@@ -53,8 +54,8 @@ function WeeklyReportContainer() {
     const calculateWeeklyReport = async () => {
 
         let overwrite = false;
-        let nowDate = new Date();
-        let date = "2023-07-01";
+        const nowDate = new Date();
+        const date = nowDate.getFullYear()+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate(); 
         let foundDate = false;        
 
         weeklyReportsList.find((weeklyReport)=>{
@@ -79,7 +80,6 @@ function WeeklyReportContainer() {
                 })
             })
           const data = await res.json();
-          console.log(data)
           data.status = 200 && overwrite ? await fetchReport(date) : await fetchReport()
         }
           catch(err){
@@ -106,7 +106,7 @@ function WeeklyReportContainer() {
         },
         {
           field: 'totalBooksInScribeRooms',
-          headerName: 'Libros en ScribeRoom',
+          headerName: 'Libros en stocker rooms',
           type: 'number',
           width: 160,
           editable: true,
@@ -124,7 +124,6 @@ function WeeklyReportContainer() {
         if(weeklyReportsList.length !== 0 ){
             let prevRows = [...rows];
             weeklyReportsList.forEach((weeklyReport, index)=>{
-                console.log(weeklyReport)
                 let newRow = {
                     id: index ,
                     date: weeklyReport.date,
