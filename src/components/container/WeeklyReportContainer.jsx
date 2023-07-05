@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import WeeklyReportGrid from '../pure/WeeklyReportGrid';
-import { Button } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 function WeeklyReportContainer() {
@@ -94,21 +94,21 @@ function WeeklyReportContainer() {
           field: 'totalBooksPerBags',
           headerName: 'Libros en bags',
           type: 'number',
-          width: 100,
+          width: 160,
           editable: true,
         },
         {
           field: 'totalBooksPerVehicles',
           headerName: 'Libros en vehículos',
           type: 'number',
-          width: 100,
+          width: 160,
           editable: true,
         },
         {
           field: 'totalBooksInScribeRooms',
           headerName: 'Libros en ScribeRoom',
           type: 'number',
-          width: 100,
+          width: 160,
           editable: true,
         },
         {
@@ -116,7 +116,7 @@ function WeeklyReportContainer() {
           headerName: 'TOTAL',
           type: 'number',
           sortable: false,
-          width: 80
+          width: 100
         },
       ];
 
@@ -145,7 +145,11 @@ function WeeklyReportContainer() {
             weeklyReportsList.length === 0 ? <WeeklyReportGrid report={0}  columns={columns} rows={[]} handleRowClick={handleRowClick}/> :
             <WeeklyReportGrid columns={columns} rows={rows} handleRowClick={handleRowClick}/>
         }
-        <Button onClick={handleButton}>Calculate</Button>
+        <Box sx={{
+                p: "10px", 
+              }}>
+        <Button variant='contained' onClick={handleButton}>Calculate</Button>
+        </Box>
        </>
         );
       }

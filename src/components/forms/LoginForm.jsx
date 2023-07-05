@@ -14,10 +14,13 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import UserContext from "../../context/contexts/UserContext";
+import AppCircularProgress from "../pure/loadings/AppCircularProgress";
   
   const LoginForm = () => {
 
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState(false);
     const [userFound, setUserFound] = useState(true); 
     const {setLoggedUserId} = useContext(UserContext);
     const initialValues = {
@@ -47,6 +50,7 @@ import UserContext from "../../context/contexts/UserContext";
                 password: values.password
               })
           })
+          res.status === 200 && setSuccess(true)
           const data = await res.json();
           if(data === 'User not found'){
             return setUserFound(false)
@@ -54,6 +58,7 @@ import UserContext from "../../context/contexts/UserContext";
           localStorage.setItem('credentials', data.token)
           setLoggedUserId(data.userId);
           console.log(data)
+
           navigate('/dashboard', {
             replace: true
           })
@@ -124,14 +129,8 @@ import UserContext from "../../context/contexts/UserContext";
                   autoComplete="current-password"
                 />
 
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
-                >
-                  Sign In
-                </Button>
+                    <AppCircularProgress text={'Sign In'} loading={loading} setSuccess={setSuccess} setLoading={setLoading} success={success}/>
+                {isSubmitting ? setLoading(true) : setLoading(false)}
               </Box>
               <Grid container>
             <Grid item xs>

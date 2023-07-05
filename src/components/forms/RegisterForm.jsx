@@ -15,9 +15,12 @@ import * as yup from "yup";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import AppCircularProgress from "../pure/loadings/AppCircularProgress";
 
 const RegisterForm = () => {
 
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [alreadyExist, setAlreadyExist] = useState(false)
   const navigate = useNavigate();
 
@@ -75,6 +78,7 @@ const RegisterForm = () => {
               role: values.is_stocker ? 'stocker' : 'student' 
             })
         })
+        
         console.log(res.status)
         res.status === 200 && navigate('/login')
         res.status === 403 && setAlreadyExist(true)
@@ -176,17 +180,11 @@ const RegisterForm = () => {
               <FormControlLabel
                 control={<Checkbox value="true" name="is_stocker" onChange={handleChange}
                 onBlur={handleBlur} color="primary" />}
-                label="Are u a stocker?"
+                label="Are you a stocker?"
                 
               />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Sign Up
-              </Button>
+            <AppCircularProgress text={'Sign Up'} loading={loading} setSuccess={setSuccess} setLoading={setLoading} success={success}/>
+            {isSubmitting ? setLoading(true) : setLoading(false)}
             </Box>
             <Grid container>
             <Grid item xs>

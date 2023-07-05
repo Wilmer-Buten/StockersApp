@@ -11,21 +11,25 @@ import {
 import BookContext from "../../context/contexts/BookContext";
 import EditBooksTextField from "../pure/EditBooksTextField";
 import StockerRoomContext from "../../context/contexts/StockerRoomContext";
+import AppSkeleton from "../pure/loadings/AppSkeleton";
+import AppAlert from "../pure/loadings/AppAlert";
 
 function StockerRoomComponent() {
   
   const location = useLocation();
   const state = location.state;
   const [editBooks, setEditBooks] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const [booksList, setBooksList] = useState([]);
+  const [booksQuantityList, setBooksQuantityList] = useState([]);
+  const [loading, setLoading] = useState(true)
+  const {books, getBooks} = useContext(BookContext);
+  const {rooms, getRooms} = useContext(StockerRoomContext); 
+
 
   const handleEditBooks = (bool) => {
     setEditBooks(bool);
   };
-  const [booksQuantityList, setBooksQuantityList] = useState([]);
-  const [booksList, setBooksList] = useState([]);
-  const {books, getBooks} = useContext(BookContext);
-  const {rooms, getRooms} = useContext(StockerRoomContext); 
-  const [loading, setLoading] = useState(true)
 
   useEffect(()=>{
    if(books.length === 0){
@@ -34,12 +38,6 @@ function StockerRoomComponent() {
    setBooksList(books); 
     setLoading(false)
   },[books])
-
-  const fetchBooks = async () => {
-    const res = await getBooks()
-    setBooksList(res); 
-    console.log(res)
-}
 
 const overwriteConfirm = () => {
   return window.confirm("'Existe un reporte realizado del día de hoy, ¿Quieres sobrescribirlo?'")
@@ -77,10 +75,9 @@ const submitBooks = async (e) => {
         })
     })
     
-    const data = await res.json();
+    res.status === 200 && setShowAlert(true)
     getRooms();
     setLoading(false);
-    console.log(data)
   }
     catch(err){
       console.log(err)
@@ -119,12 +116,6 @@ const storeBooksQuantity = async (e, book) => {
   const token = localStorage.getItem('credentials');
 } 
 
-  if(loading) return (
-    <div>
-      LOADINGGG
-    </div>
-  )
-
   return (
     <div>
       <Box
@@ -157,7 +148,9 @@ const storeBooksQuantity = async (e, book) => {
             >
               {state.room_name}
             </Typography>
-            {editBooks ? (
+            <AppAlert open={showAlert} setOpen={setShowAlert}/>
+            {loading ? <AppSkeleton/>
+            : editBooks ? (
               <Stack
                 component="form"
                 sx={{
@@ -188,7 +181,8 @@ const storeBooksQuantity = async (e, book) => {
                   Editar Libros
                 </Button>
               </Stack>
-            )}
+            )
+            }
           </Box>
         </Container>
       </Box>

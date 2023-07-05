@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken'
 
 function UserState(props) {
   const initialState = {
-    userList: [],
+    usersList: [],
     loggedUserId: ''
   };
 

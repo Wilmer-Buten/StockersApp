@@ -1,10 +1,9 @@
 import React from 'react';
 import BookListContainer from '../components/container/BookListContainer';
+import AppBarComponent from '../components/container/AppBarComponent';
 function DashBoard() {
   return (
-    <div>
-      <BookListContainer></BookListContainer>
-    </div>
+    <AppBarComponent prop={<BookListContainer/>}/>
   );
 }
 

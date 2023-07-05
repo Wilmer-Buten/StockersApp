@@ -1,10 +1,11 @@
 import React from 'react';
 import CanvassingVehicleContainer from '../components/container/CanvassingVehicleContainer';
+import AppBarComponent from '../components/container/AppBarComponent';
 
 function CanvassingVehicle() {
   return (
     <div>
-      <CanvassingVehicleContainer></CanvassingVehicleContainer>
+      <AppBarComponent prop={<CanvassingVehicleContainer/>}/>
     </div>
   );
 }

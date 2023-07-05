@@ -1,10 +1,12 @@
 import React from 'react';
 import WeeklyReportContainer from '../components/container/WeeklyReportContainer';
+import AppBarComponent from '../components/container/AppBarComponent';
 
 function WeeklyReport() {
   return (
     <div>
-      <WeeklyReportContainer/>
+      <AppBarComponent prop={<WeeklyReportContainer/>}/>
+      
     </div>
   );
 }

@@ -12,6 +12,8 @@ import {
 import BookContext from "../../context/contexts/BookContext";
 import EditBooksTextField from "../pure/EditBooksTextField";
 import VehicleContext from "../../context/contexts/VehiclesContext";
+import AppSkeleton from "../pure/loadings/AppSkeleton";
+import AppAlert from "../pure/loadings/AppAlert";
 
 function CanvassingVehicleListContainer() {
   const location = useLocation();
@@ -26,6 +28,7 @@ function CanvassingVehicleListContainer() {
   const {books, getBooks} = useContext(BookContext);
   const {vehicles, getVehicles} = useContext(VehicleContext); 
   const [loading, setLoading] = useState(true)
+  const [showAlert, setShowAlert] = useState(false);
 
   useEffect(()=>{
     if(books.length !==0){
@@ -39,7 +42,6 @@ function CanvassingVehicleListContainer() {
   const fetchBooks = async () => {
     const res = await getBooks()
     setBooksList(res); 
-    console.log(res)
 }
 
 const overwriteConfirm = () => {
@@ -53,7 +55,6 @@ const submitBooks = async (e) => {
   let nowDate = new Date(); 
   let foundDate = false
   let date = "2023-06-27"
-  console.log(state._id)
   const index = vehicles.findIndex((vehicle) => {return vehicle._id === state._id})
   vehicles[index].quantity_per_book.find((obj) => {return Date.parse(obj.date) === Date.parse(date)}) && (foundDate = true)
   if (foundDate){
@@ -77,10 +78,9 @@ const submitBooks = async (e) => {
         })
     })
     
-    const data = await res.json();
+    res.status === 200 && setShowAlert(true)
     getVehicles()
     setLoading(false);
-    console.log(data)
   }
     catch(err){
       console.log(err)
@@ -119,12 +119,6 @@ const storeBooksQuantity = async (e, book) => {
   const token = localStorage.getItem('credentials');
 } 
 
-  if(loading) return (
-    <div>
-      LOADINGGG
-    </div>
-  )
-
   return (
     <div>
       <Box
@@ -157,7 +151,10 @@ const storeBooksQuantity = async (e, book) => {
             >
               {state.vehicle_name}
             </Typography>
-            {editBooks ? (
+            <AppAlert open={showAlert} setOpen={setShowAlert}/>
+            {loading ? 
+            <AppSkeleton/>
+            : editBooks ? (
               <Stack
                 component="form"
                 sx={{

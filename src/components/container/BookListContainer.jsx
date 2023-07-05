@@ -8,6 +8,7 @@ import {
   Table,
   TableBody,
   Button,
+  Box,
 } from "@mui/material";
 import BooksTable from "../pure/BooksTable";
 import { useState } from "react";
@@ -15,27 +16,35 @@ import SendIcon from "@mui/icons-material/Send";
 import { useNavigate } from "react-router-dom";
 import BookContext from "../../context/contexts/BookContext";
 import UserContext from "../../context/contexts/UserContext";
+import AppSkeleton from "../pure/loadings/AppSkeleton";
+import AppAlert from "../pure/loadings/AppAlert";
 
 function BookListContainer() {
+
   const navigate = useNavigate();
   const [checkedRadios, setCheckedRadios] = useState([]);
   const [booksList, setBooksList] = useState([]);
   const [loading, setLoading] = useState(true);
-  
-  const {getUsers, loggedUserId, setLoggedUserId} = useContext(UserContext);
+  const [showAlert, setShowAlert] = useState(false);
+  const { getUsers, loggedUserId, setLoggedUserId } = useContext(UserContext);
   const { books, getBooks } = useContext(BookContext);
 
+  useEffect(() => {
+    if (books.length === 0) {
+      getBooks();
+      console.log(books);
+    } else {
+      setBooksList(books);
+    }
+    console.log(books);
+  }, [books]);
 
   useEffect(() => {
-    fetchBooks();
-  }, []);
-
-  useEffect(()=>{
-    if(loggedUserId=== ''){
-      const token = localStorage.getItem('credentials');
-      setLoggedUserId(token)
+    if (loggedUserId === "") {
+      const token = localStorage.getItem("credentials");
+      setLoggedUserId(token);
     }
-  },[])
+  }, []);
 
   useEffect(() => {
     if (booksList.length > 0) {
@@ -141,17 +150,6 @@ function BookListContainer() {
     setCheckedRadios(prevCheckedRadios);
   };
 
-  const handleLogOut = () => {
-    localStorage.clear();
-    navigate("/login");
-  };
-
-  const fetchBooks = async () => {
-    const res = await getBooks();
-    setBooksList(res);
-    console.log(res);
-  };
-
   const fromBooleanToNumber = () => {
     let arr = checkedRadios.map((radioR) => {
       let booksQuantity = {
@@ -171,7 +169,7 @@ function BookListContainer() {
 
   const overwriteConfirm = () => {
     return window.confirm(
-      "'Existe un reporte realizado del día de hoy, ¿Quieres sobrescribirlo?'"
+      "Existe un reporte realizado del día de hoy, ¿Quieres sobrescribirlo?"
     );
   };
 
@@ -179,15 +177,16 @@ function BookListContainer() {
     const token = localStorage.getItem("credentials");
     const studentsBooksReport = fromBooleanToNumber();
     const users = await getUsers();
-    console.log(users)
-    const index = users.findIndex((user)=>{return user.userId === loggedUserId})
+    const index = users.findIndex((user) => {
+      return user.userId === loggedUserId;
+    });
 
     let overwrite = false;
     let nowDate = new Date();
-    let date = "2023-06-28";
+    let date = "2023-07-01";
     let foundDate = false;
 
-    console.log(users[index])
+    console.log(users[index]);
     users[index].quantity_per_book.find((obj) => {
       return Date.parse(obj.date) === Date.parse(date);
     }) && (foundDate = true);
@@ -211,22 +210,21 @@ function BookListContainer() {
             quantity: studentsBooksReport,
           }),
         });
-
-        const data = await res.json();
+        console.log(res.status);
+        res.status === 200 && setShowAlert(true)
         setLoading(false);
-        console.log(data);
+
+
       } catch (err) {
         console.log(err);
       }
     }
-
   };
-  if (loading) {
-    return <div>LOADINGGGGG</div>;
-  }
+
   return (
+    <>
+    <AppAlert open={showAlert} setOpen={setShowAlert}/>
     <TableContainer>
-      <Button onClick={handleLogOut}>Log out</Button>
       <Table>
         <TableHead>
           <TableRow>
@@ -239,24 +237,41 @@ function BookListContainer() {
             <TableCell>5</TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
-          {booksList.map((book, index) => {
-            return (
-              <BooksTable
-                key={index}
-                radioStatus={checkedRadios[index]}
-                handleRadios={handleRadios}
-                bookId={index}
-                bookName={book.name}
-              ></BooksTable>
-            );
-          })}
-        </TableBody>
+        {loading ? (
+          <AppSkeleton />
+        ) : (
+          <>
+            <TableBody>
+              {booksList.map((book, index) => {
+                return (
+                  <BooksTable
+                    key={index}
+                    radioStatus={checkedRadios[index]}
+                    handleRadios={handleRadios}
+                    bookId={index}
+                    bookName={book.name}
+                  ></BooksTable>
+                );
+              })}
+            </TableBody>
+            <Box
+              sx={{
+                p: "10px" 
+              }}
+            >
+              <Button
+                variant="contained"
+                onClick={submitBooks}
+                endIcon={<SendIcon />}
+              >
+                Send
+              </Button>
+            </Box>
+          </>
+        )}
       </Table>
-      <Button variant="contained" onClick={submitBooks} endIcon={<SendIcon />}>
-        Send
-      </Button>
     </TableContainer>
+    </>
   );
 }
 
