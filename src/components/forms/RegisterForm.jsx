@@ -65,7 +65,7 @@ const RegisterForm = () => {
       onSubmit={async (values) => {
         setAlreadyExist(false);
         try{
-          const res = await fetch('http://localhost:4000/user/signUp', {
+          const res = await fetch(process.env.REACT_APP_API_LINK + '/user/signUp', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

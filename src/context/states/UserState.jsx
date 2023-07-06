@@ -13,7 +13,7 @@ function UserState(props) {
   const [state, dispatch] = useReducer(UserReducer, initialState);
 
   const fetchUsers = async () => {
-    const res = await fetch('http://localhost:4000/users') 
+    const res = await fetch(process.env.REACT_APP_API_LINK + '/users') 
     const users = await res.json();
     return users
 }

@@ -11,7 +11,7 @@ function BookState(props) {
   const [state, dispatch] = useReducer(BookReducer, initialState);
 
   const fetchBooks = async () => {
-    const res = await fetch('http://localhost:4000/books') 
+    const res = await fetch(process.env.REACT_APP_API_LINK + '/books') 
     const books = await res.json();
     return books
 }

@@ -14,7 +14,7 @@ function VehicleState(props) {
   const [state, dispatch] = useReducer(VehicleReducer, initialState);
 
   const fetchVehicles = async () => {
-    const res = await fetch('http://localhost:4000/vehicles') 
+    const res = await fetch(process.env.REACT_APP_API_LINK + '/vehicles') 
     const vehicles = await res.json();
     return vehicles
 }

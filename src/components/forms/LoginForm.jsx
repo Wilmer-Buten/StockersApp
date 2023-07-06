@@ -38,7 +38,7 @@ import AppCircularProgress from "../pure/loadings/AppCircularProgress";
         validationSchema={registerSchema}
         onSubmit={async (values) => {
           try{
-            const res = await fetch('http://localhost:4000/user/login', {
+            const res = await fetch(process.env.REACT_APP_API_LINK + '/user/login', {
               method: "POST",
               headers: {
                   "Content-Type": "application/json"

@@ -69,7 +69,7 @@ function WeeklyReportContainer() {
         if (overwrite || !foundDate) {
 
         try{
-            const res = await fetch('http://localhost:4000/weeklyreport/create', {
+            const res = await fetch(process.env.REACT_APP_API_LINK + '/weeklyreport/create', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

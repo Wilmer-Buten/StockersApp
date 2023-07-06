@@ -6,7 +6,6 @@ import Container from '@mui/material/Container';
 import CanvassingVehicleCard from '../pure/CanvassingVehicleCard';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BookContext from '../../context/contexts/BookContext';
 import { useContext } from 'react';
 import VehicleContext from '../../context/contexts/VehiclesContext';
 import AppSkeleton from '../pure/loadings/AppSkeleton';

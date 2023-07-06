@@ -11,7 +11,7 @@ function StockerRoomState(props) {
   const [state, dispatch] = useReducer(StockerRoomReducer, initialState);
 
   const fetchRooms = async () => {
-    const res = await fetch('http://localhost:4000/stockerrooms') 
+    const res = await fetch(process.env.REACT_APP_API_LINK + '/stockerrooms') 
     const rooms = await res.json();
     return rooms
 }

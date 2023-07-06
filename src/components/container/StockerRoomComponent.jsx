@@ -49,7 +49,7 @@ const submitBooks = async (e) => {
   const token = localStorage.getItem('credentials');
   let overwrite = false;
   const nowDate = new Date();
-  const date = nowDate.getFullYeFar()+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate(); 
+  const date = nowDate.getFullYear()+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate(); 
   let foundDate = false
   const index = rooms.findIndex((room) => {return room._id === state._id})
   rooms[index].quantity_per_book.find((obj) => {return Date.parse(obj.date) === Date.parse(date)}) && (foundDate = true)
@@ -60,7 +60,7 @@ const submitBooks = async (e) => {
   if(overwrite || !foundDate){
     try{
       setLoading(true)
-      const res = await fetch('http://localhost:4000/stockerrooms/saveBooks', {
+      const res = await fetch(process.env.REACT_APP_API_LINK + '/stockerrooms/savebooks', {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
