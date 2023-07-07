@@ -35,7 +35,18 @@ function StockerRoomComponent() {
    if(books.length === 0){
     getBooks()
    }
-   setBooksList(books); 
+   if(rooms.length ===0){
+    getRooms()
+   }
+   setBooksList(books);
+   let prevBookQuantityList = [...booksQuantityList]; 
+   books.forEach((book) => {
+    prevBookQuantityList.push({
+      bookId: book.id,
+      quantity: 0
+    })
+   })
+   setBooksQuantityList(prevBookQuantityList)
     setLoading(false)
   },[books])
 
@@ -44,7 +55,7 @@ const overwriteConfirm = () => {
 }
  
 const submitBooks = async (e) => {
-  
+  console.log(rooms)
   e.preventDefault()
   const token = localStorage.getItem('credentials');
   let overwrite = false;
@@ -86,33 +97,23 @@ const submitBooks = async (e) => {
 } 
 
 const storeBooksQuantity = async (e, book) => {
+
   e.preventDefault();
-  let found = false
+  let value = e.target.value
+  if(e.target.value.length === 0){
+    value = 0
+  }
   let prevBookQuantityList = [...booksQuantityList]
   let newBookQuantity = { bookId: book.id,
-    quantity: e.target.value }
+    quantity: value }
  
-    
-  if (prevBookQuantityList.length === 0){
-    prevBookQuantityList.push(newBookQuantity)
-    return setBooksQuantityList(prevBookQuantityList);
-  }
-
   prevBookQuantityList.forEach((obj, index) => {
     if(obj.bookId === book.id){
-    found = true
     prevBookQuantityList[index] = newBookQuantity
     setBooksQuantityList(prevBookQuantityList)
     }
   })
-  if(!found){
     
-    prevBookQuantityList.push(newBookQuantity)
-    setBooksQuantityList(prevBookQuantityList);
-
-  }
-    
-  const token = localStorage.getItem('credentials');
 } 
 
   return (

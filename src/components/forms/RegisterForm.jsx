@@ -72,7 +72,7 @@ const RegisterForm = () => {
             },
             body: JSON.stringify({
               username: values.username,
-              email: values.email,
+              email: values.email.toLowerCase(),
               password: values.password, 
               role: values.is_stocker ? 'stocker' : 'student' 
             })

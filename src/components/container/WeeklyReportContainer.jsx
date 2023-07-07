@@ -22,7 +22,7 @@ function WeeklyReportContainer() {
 
     const fetchReport = async (date) => {
 
-        const res = await fetch('http://localhost:4000/weeklyReport/')
+        const res = await fetch(process.env.REACT_APP_API_LINK + '/weeklyReport/')
         const data = await res.json()
         if(date){
             const index = weeklyReportsList.findIndex((weeklyReport)=>{return weeklyReport.date === date})
@@ -121,6 +121,7 @@ function WeeklyReportContainer() {
       ];
 
       useEffect(()=>{
+        console.log(weeklyReportsList)
         if(weeklyReportsList.length !== 0 ){
             let prevRows = [...rows];
             weeklyReportsList.forEach((weeklyReport, index)=>{
