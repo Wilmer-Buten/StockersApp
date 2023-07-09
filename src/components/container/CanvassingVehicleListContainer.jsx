@@ -30,18 +30,20 @@ function CanvassingVehicleListContainer() {
   const [showAlert, setShowAlert] = useState(false);
 
   useEffect(()=>{
-    if(books.length !==0){
-      setBooksList(books)
-    } else {
-      fetchBooks()
-    }
+    if(books.length ===0){
+      getBooks()
+    } 
+  setBooksList(books)
+  let prevBookQuantityList = [...booksQuantityList]; 
+   books.forEach((book) => {
+    prevBookQuantityList.push({
+      bookId: book.id,
+      quantity: 0
+    })
+   })
+   setBooksQuantityList(prevBookQuantityList)
     setLoading(false)
-  },[])
-
-  const fetchBooks = async () => {
-    const res = await getBooks()
-    setBooksList(res); 
-}
+  },[books])
 
 const overwriteConfirm = () => {
   return window.confirm("'Existe un reporte realizado del día de hoy, ¿Quieres sobrescribirlo?'")
@@ -89,33 +91,23 @@ const submitBooks = async (e) => {
 } 
 
 const storeBooksQuantity = async (e, book) => {
+
   e.preventDefault();
-  let found = false
+  let value = e.target.value
+  if(e.target.value.length === 0){
+    value = 0
+  }
   let prevBookQuantityList = [...booksQuantityList]
   let newBookQuantity = { bookId: book.id,
-    quantity: e.target.value }
- 
-    
-  if (prevBookQuantityList.length === 0){
-    prevBookQuantityList.push(newBookQuantity)
-    return setBooksQuantityList(prevBookQuantityList);
-  }
+    quantity: value }
 
   prevBookQuantityList.forEach((obj, index) => {
     if(obj.bookId === book.id){
-    found = true
     prevBookQuantityList[index] = newBookQuantity
     setBooksQuantityList(prevBookQuantityList)
     }
   })
-  if(!found){
     
-    prevBookQuantityList.push(newBookQuantity)
-    setBooksQuantityList(prevBookQuantityList);
-
-  }
-    
-  const token = localStorage.getItem('credentials');
 } 
 
   return (

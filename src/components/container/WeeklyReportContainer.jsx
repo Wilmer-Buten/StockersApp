@@ -143,7 +143,7 @@ function WeeklyReportContainer() {
        <>
         {
             weeklyReportsList.length === 0 ? <WeeklyReportGrid report={0}  columns={columns} rows={[]} handleRowClick={handleRowClick}/> :
-            <WeeklyReportGrid columns={columns} rows={rows} handleRowClick={handleRowClick}/>
+            <WeeklyReportGrid  columns={columns} rows={rows} handleRowClick={handleRowClick}/>
         }
         <Box sx={{
                 p: "10px", 
