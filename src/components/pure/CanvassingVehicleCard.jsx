@@ -1,12 +1,12 @@
-import { Grid, Card, CardMedia,CardContent, Typography, CardActions, Button } from '@mui/material';
+import { Grid, Card, CardMedia,CardContent, Typography} from '@mui/material';
 
 function CanvassingVehicleCard({vehicle, handleVehicle}) {
 
     
   return (
-    <Grid item key={JSON.stringify(vehicle._id)} xs={12} sm={6} md={4}>
+    <Grid item xs={12} sm={6} md={4}>
     <Card
-      onClick={()=> {handleVehicle(vehicle)}}
+      onClick={() => handleVehicle(vehicle)}
       sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
       style={{cursor: 'pointer'}} 
     >

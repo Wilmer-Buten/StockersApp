@@ -4,9 +4,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { green } from '@mui/material/colors';
 import Button from '@mui/material/Button';
 
-export default function AppCircularProgress({text, loading, setSuccess, setLoading, success}) {
+export default function AppCircularProgress({text, loading, handleSubmit, helpertext, setLoading, setSuccess, success}) {
  
-
   const buttonSx = {
     ...(success && {
       bgcolor: green[500],
@@ -19,7 +18,11 @@ export default function AppCircularProgress({text, loading, setSuccess, setLoadi
   const handleButtonClick = () => {
     if (!loading) {
       setSuccess(false);
+      console.log(helpertext)
+      !helpertext && setLoading(true);
     }
+
+    handleSubmit && handleSubmit();
   };
 
   return (

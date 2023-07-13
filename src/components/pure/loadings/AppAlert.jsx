@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import Collapse from '@mui/material/Collapse';
 import CloseIcon from '@mui/icons-material/Close';
 
-export default function AppAlert({open, setOpen}) {
+export default function AppAlert({text, open, setOpen}) {
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -25,7 +25,7 @@ export default function AppAlert({open, setOpen}) {
           }
           sx={{ mb: 2 }}
         >
-          Conteo salvado satisfactoriamente!
+          {text ? text : 'Conteo salvado satisfactoriamente!'}
         </Alert>
       </Collapse>
     </Box>

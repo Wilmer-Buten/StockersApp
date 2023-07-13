@@ -89,7 +89,9 @@ function WeeklyReportContainer() {
     }
 
     const columns =  [
-        { field: 'date', headerName: 'Date', width: 110 },
+        { field: '.', headerName: ' ', width: 10 },
+
+        { field: 'date', headerName: 'Date', width: 80 },
         {
           field: 'totalBooksPerBags',
           headerName: 'Libros en bags',
@@ -121,7 +123,6 @@ function WeeklyReportContainer() {
       ];
 
       useEffect(()=>{
-        console.log(weeklyReportsList)
         if(weeklyReportsList.length !== 0 ){
             let prevRows = [...rows];
             weeklyReportsList.forEach((weeklyReport, index)=>{

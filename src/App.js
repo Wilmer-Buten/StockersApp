@@ -15,6 +15,7 @@ import CanvassingVehiclesListPage from './pages/CanvassingVehiclesListPage'
 import StockerRoomsPage from './pages/StockerRoomsPage';
 import StockerRoomsListPage from './pages/StockerRoomsListPage';
 import VerifyRole from './auth/VerifyRole';
+import ConfigPage from './pages/ConfigPage';
 
 function App() {
   return (
@@ -32,12 +33,13 @@ function App() {
             <Route element={<ProtectedRoute/>}>
               <Route exact path='/dashboard' element={<DashBoard/>}></Route>
               <Route element={<VerifyRole/>}>
-              <Route exact path='/weeklyreports' element={<WeeklyReport/>}></Route>
-              <Route exact path='/canvassingVehicles' element={<CanvassingVehicle/>}></Route>
-              <Route exact path='/editvehicle' element={<CanvassingVehiclesListPage/>}></Route>
-              <Route exact path='/stockerrooms' element={<StockerRoomsPage/>}></Route>
-              <Route exact path='/editroom' element={<StockerRoomsListPage/>}></Route>
-              <Route exact path='/weeklyreport/report' element={<ReportData/>}></Route>
+                <Route exact path='/weeklyreports' element={<WeeklyReport/>}></Route>
+                <Route exact path='/canvassingVehicles' element={<CanvassingVehicle/>}></Route>
+                <Route exact path='/editvehicle' element={<CanvassingVehiclesListPage/>}></Route>
+                <Route exact path='/stockerrooms' element={<StockerRoomsPage/>}></Route>
+                <Route exact path='/editroom' element={<StockerRoomsListPage/>}></Route>
+                <Route exact path='/weeklyreport/report' element={<ReportData/>}></Route>
+                <Route exact path='/configuration' element={<ConfigPage/>}></Route>
               </Route>
             </Route>
           </Routes>

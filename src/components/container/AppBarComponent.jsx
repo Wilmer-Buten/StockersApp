@@ -16,6 +16,7 @@ import ListItemText from "@mui/material/ListItemText";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import MenuIcon from "@mui/icons-material/Menu";
+import SettingsIcon from '@mui/icons-material/Settings';
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
@@ -105,8 +106,8 @@ export default function AppBarComponent({ prop }) {
     navigate("/login");
   };
   const handleListItem = (e) => {
+ 
     const id = e.target.id;
-  
     switch (id) {
       case "dashboard":
         navigate("/dashboard");
@@ -119,6 +120,9 @@ export default function AppBarComponent({ prop }) {
         break;
       case "reports":
         navigate("/weeklyreports");
+        break;
+      case "config":
+        navigate("/configuration");
       default:
         break;
       case "logout":
@@ -227,6 +231,16 @@ export default function AppBarComponent({ prop }) {
                 id="reports"
                 onClick={handleListItem}
                 primary="Reportes"
+              />
+            </ListItemButton>
+               <ListItemButton id="config" onClick={handleListItem}>
+              <ListItemIcon id="config" onClick={handleListItem}>
+                <SettingsIcon id="config" onClick={handleListItem} />
+              </ListItemIcon>
+              <ListItemText
+                id="config"
+                onClick={handleListItem}
+                primary="Configuracion"
               />
             </ListItemButton>
             <ListItemButton

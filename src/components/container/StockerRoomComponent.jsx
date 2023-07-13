@@ -55,7 +55,6 @@ const overwriteConfirm = () => {
 }
  
 const submitBooks = async (e) => {
-  console.log(rooms)
   e.preventDefault()
   const token = localStorage.getItem('credentials');
   let overwrite = false;
