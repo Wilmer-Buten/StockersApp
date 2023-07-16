@@ -21,12 +21,20 @@ function BooksReportContainer() {
        }
  
        let row = books.map((book, index) => {
+        let bagsQuantityArr = state.books_in_bags_quantity.quantity_per_book[index];
+        let vehiclesQuantityArr = state.books_in_vehicles_quantity.quantity_per_book[index];
+        let roomsQuantityArr = state.books_in_rooms_quantity.quantity_per_book[index];
+        let bookTotal = 0;
+        bagsQuantityArr && (bookTotal = bookTotal + bagsQuantityArr.quantity);
+        vehiclesQuantityArr && (bookTotal = bookTotal + vehiclesQuantityArr.quantity);
+        roomsQuantityArr && (bookTotal = bookTotal + roomsQuantityArr.quantity); 
+
         return {
           name: book.name, 
           bagsQuantity: state.books_in_bags_quantity.quantity_per_book[index] ? state.books_in_bags_quantity.quantity_per_book[index].quantity : 0,
           vehiclesQuantity: state.books_in_vehicles_quantity.quantity_per_book[index] ? state.books_in_vehicles_quantity.quantity_per_book[index].quantity : 0,
           roomsQuantity: state.books_in_rooms_quantity.quantity_per_book[index] ? state.books_in_rooms_quantity.quantity_per_book[index].quantity : 0,
-          total: book.quantity 
+          total: bookTotal
                }
       })
       setRows(row)

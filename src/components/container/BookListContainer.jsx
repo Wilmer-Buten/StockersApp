@@ -174,7 +174,7 @@ function BookListContainer() {
     });
     let overwrite = false;
     const nowDate = new Date();
-    const date = nowDate.getFullYear()+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate(); 
+    const date = '2023-7-14'; 
     let foundDate = false;
     users[index].quantity_per_book.find((obj) => {
       return Date.parse(obj.date) === Date.parse(date);

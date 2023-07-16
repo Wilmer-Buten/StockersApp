@@ -59,7 +59,7 @@ const submitBooks = async (e) => {
   const token = localStorage.getItem('credentials');
   let overwrite = false;
   const nowDate = new Date();
-  const date = nowDate.getFullYear()+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate(); 
+  const date = '2023-7-14'; 
   let foundDate = false
   const index = rooms.findIndex((room) => {return room._id === state._id})
   rooms[index].quantity_per_book.find((obj) => {return Date.parse(obj.date) === Date.parse(date)}) && (foundDate = true)

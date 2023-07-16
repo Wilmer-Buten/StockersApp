@@ -32,7 +32,6 @@ function UserState(props) {
     const decoded = jwt.decode(userId)
     if(decoded){
       userId = decoded.id
-      console.log(userId)
         }
 
         dispatch({
