@@ -1,6 +1,4 @@
 import { TableRow, Radio, TableCell } from '@mui/material';
-import PropTypes from 'prop-types'
-
 
 function BooksTable({bookId, radioStatus, handleRadios, bookName}) {
 

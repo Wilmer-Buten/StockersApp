@@ -1,7 +1,4 @@
 import { useReducer } from "react";
-import BookContext from "../contexts/BookContext";
-import { GET_BOOKS } from "../types/bookTypes";
-import BookReducer from "../reducers/BookReducer";
 import VehicleReducer from "../reducers/VehicleReducer";
 import { GET_VEHICLES } from "../types/vehiclesTypes";
 import VehicleContext from "../contexts/VehiclesContext";

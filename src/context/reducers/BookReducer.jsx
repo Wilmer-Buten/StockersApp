@@ -1,4 +1,3 @@
-import React from 'react';
 import { GET_BOOKS } from '../types/bookTypes';
 
 function BookReducer(state, action) {

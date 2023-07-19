@@ -7,7 +7,7 @@ function WeeklyReportGrid({columns, rows, handleRowClick, handleRowSelection}) {
 
   return (
     <div>
-           <Box sx={{ height: 430, width: '100%' }}>
+           <Box sx={{ height: 430, width: '100%'} }>
             <DataGrid
                 rows={rows}
                 columns={columns}

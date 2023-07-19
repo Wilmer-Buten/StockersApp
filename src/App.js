@@ -27,7 +27,8 @@ function App() {
        <StockerRoomState>
         <BrowserRouter>
           <Routes>
-            <Route exact index path='/signUp' element={<RegisterForm/>}></Route>
+          <Route exact index path='/' element={<DashBoard/>}></Route>
+            <Route exact path='/signUp' element={<RegisterForm/>}></Route>
             <Route exact path='/login' element={<LoginForm/>}></Route>
             <Route exact path='/dash' element={<AppBarComponent/>}></Route>
             <Route element={<ProtectedRoute/>}>

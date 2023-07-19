@@ -12,7 +12,6 @@ import {
 import BooksTable from "../pure/BooksTable";
 import { useState } from "react";
 import SendIcon from "@mui/icons-material/Send";
-import { useNavigate } from "react-router-dom";
 import BookContext from "../../context/contexts/BookContext";
 import UserContext from "../../context/contexts/UserContext";
 import AppSkeleton from "../pure/loadings/AppSkeleton";
@@ -20,7 +19,6 @@ import AppAlert from "../pure/loadings/AppAlert";
 
 function BookListContainer() {
 
-  const navigate = useNavigate();
   const [checkedRadios, setCheckedRadios] = useState([]);
   const [booksList, setBooksList] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -147,7 +145,7 @@ function BookListContainer() {
         bookId: 0,
         quantity: 0,
       };
-      radioR.map((obj, index) => {
+      radioR.forEach((obj, index) => {
         booksQuantity.bookId = obj.bookId;
         if (obj.radioStatus) {
           booksQuantity.quantity = index;
@@ -174,7 +172,7 @@ function BookListContainer() {
     });
     let overwrite = false;
     const nowDate = new Date();
-    const date = '2023-7-14'; 
+    const date = nowDate.getFullYear()+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate(); 
     let foundDate = false;
     users[index].quantity_per_book.find((obj) => {
       return Date.parse(obj.date) === Date.parse(date);

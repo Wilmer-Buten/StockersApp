@@ -5,7 +5,7 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import { Grid, Card, CardMedia,CardContent, Typography, CardActions, Button, Stack } from '@mui/material';
+import {Button, Stack } from '@mui/material';
 import WeeklyReportGrid from '../pure/WeeklyReportGrid';
 import BookContext from '../../context/contexts/BookContext';
 import StockerRoomContext from '../../context/contexts/StockerRoomContext';
@@ -219,7 +219,6 @@ updateGrid && setUpdateGrid(false)
           itemsIds: selectedItemsIds 
         })
     })
-      const data = await res.json()
       if(res.status === 200) {
         setDisplayAlert(true)
         setDisplaySkeleton(false)
@@ -270,7 +269,6 @@ updateGrid && setUpdateGrid(false)
         },
         body: JSON.stringify(item)
     })
-      const data = await res.json()
       if(res.status === 200) {
         setDisplayAlert(true)
         if(value==='1') {

@@ -1,4 +1,3 @@
-import React from 'react';
 import { GET_VEHICLES } from '../types/vehiclesTypes';
 
 function VehicleReducer(state, action) {

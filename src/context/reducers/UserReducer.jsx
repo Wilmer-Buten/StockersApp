@@ -1,4 +1,3 @@
-import React from 'react';
 import { GET_USERS, SET_LOGGED_USER_ID } from '../types/userTypes';
 
 function UserReducer(state, action) {

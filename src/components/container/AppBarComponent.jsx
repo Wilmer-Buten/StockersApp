@@ -123,6 +123,7 @@ export default function AppBarComponent({ prop }) {
         break;
       case "config":
         navigate("/configuration");
+        break;
       default:
         break;
       case "logout":
