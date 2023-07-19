@@ -91,7 +91,7 @@ function WeeklyReportContainer() {
     const columns =  [
         { field: '.', headerName: ' ', width: 10 },
 
-        { field: 'date', headerName: 'Date', width: 80 },
+        { field: 'date', headerName: 'Date', width: 100 },
         {
           field: 'totalBooksPerBags',
           headerName: 'Libros en bags',
