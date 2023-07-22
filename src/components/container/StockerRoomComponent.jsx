@@ -13,6 +13,7 @@ import EditBooksTextField from "../pure/EditBooksTextField";
 import StockerRoomContext from "../../context/contexts/StockerRoomContext";
 import AppSkeleton from "../pure/loadings/AppSkeleton";
 import AppAlert from "../pure/loadings/AppAlert";
+import WeeklyReportGrid from "../pure/WeeklyReportGrid";
 
 function StockerRoomComponent() {
   
@@ -25,19 +26,38 @@ function StockerRoomComponent() {
   const [loading, setLoading] = useState(true)
   const {books, getBooks} = useContext(BookContext);
   const {rooms, getRooms} = useContext(StockerRoomContext); 
-
+  const [gridRows, setGridRows] = useState([]);
+  const [lastReportDate, setLastReportDate] = useState('');
 
   const handleEditBooks = (bool) => {
     setEditBooks(bool);
   };
 
   useEffect(()=>{
+    if(rooms.length ===0){
+     getRooms()
+    }  
    if(books.length === 0){
     getBooks()
-   }
-   if(rooms.length ===0){
-    getRooms()
-   }
+   }else {
+    const roomsReportsLength = state.quantity_per_book.length;
+    const latestQuantityPerBook = state.quantity_per_book[roomsReportsLength-1];
+    setLastReportDate(latestQuantityPerBook.date)
+    let newGridRows = books.map((book, index) => {
+                
+      const i = latestQuantityPerBook.quantity.findIndex((obj) => {return obj.bookId === book.id})
+      
+      return {
+  
+        id: index,
+        bookName: book.name,
+        bookQuantity: latestQuantityPerBook.quantity[i].quantity
+      };
+    
+    });
+    
+    setGridRows(newGridRows);
+  }
    setBooksList(books);
    let prevBookQuantityList = [...booksQuantityList]; 
    books.forEach((book) => {
@@ -115,6 +135,10 @@ const storeBooksQuantity = async (e, book) => {
     
 } 
 
+const gridColumns = [
+  { field: "bookName", headerName: "Libro", width: 350 },
+  { field: "bookQuantity", headerName: "Cantidad", width: 130 },
+];
   return (
     <div>
       <Box
@@ -165,6 +189,7 @@ const storeBooksQuantity = async (e, book) => {
                   <Button type="submit" variant="contained" onClick={(e)=>{submitBooks(e)}}>Save</Button>
               </Stack>
             ) : (
+              <>
               <Stack
                 sx={{ pt: 1 }}
                 direction="row"
@@ -179,7 +204,13 @@ const storeBooksQuantity = async (e, book) => {
                 >
                   Editar Libros
                 </Button>
+             
               </Stack>
+                <Box sx={{ pt: 3 }} >
+                <p style={{color: 'grey', fontStyle: "italic"}}>*Last report in {lastReportDate}</p>
+                  <WeeklyReportGrid columns={gridColumns} rows={gridRows} />
+                </Box>
+                </>
             )
             }
           </Box>
